@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\AuthController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ForgetPasswordController;
 
 Route::get('/', [AuthController::class, 'login'])->name("users.login");
 Route::post('/', [AuthController::class, 'auth'])->name("users.auth");
@@ -16,17 +18,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('users.logout');
 
     Route::get('/Dashboard', function () {
-        return view('dashboard');
+        return view('user.dashboard');
     })->middleware(['user', 'verified'])->name('dashboard');
 
     Route::get('/admin', function () {
         $users = User::all();
         return view('admin.dashboard', compact('users'));
-    })->middleware('admin')->name('admin.dashboard');
+    })->middleware(['admin', 'verified'])->name('admin.dashboard');
+
+    Route::resource('/Dahboard/users', UserController::class)->middleware('verified');
 });
 
 
-
+// EMAIL VERIFICATION =>
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
@@ -41,3 +45,15 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     $request->fulfill();
     return redirect('/Dashboard');
 })->middleware(['auth'])->name('verification.verify');
+
+
+
+// FORGET PASSWORD =>
+Route::get('/forget-password', [ForgetPasswordController::class, 'ViewforgetPassword'])->name('users.view-forget-password');
+Route::post('/forget-password', [ForgetPasswordController::class, 'forgetPassword'])->name('users.forget-password');
+// Verification dyal Code =>
+Route::get('/verify-code/{email}', [ForgetPasswordController::class, 'viewVerifyCode'])->name('users.view-verify-code');
+Route::post('/verify-code', [ForgetPasswordController::class, 'verifyCode'])->name('users.verify-code');
+// Reset password =>
+Route::get('/reset-password/{email}', [ForgetPasswordController::class, 'viewResetPassword'])->name('users.view-rest-password');
+Route::post('/reset-password', [ForgetPasswordController::class, 'resetPassword'])->name('users.reset-password');

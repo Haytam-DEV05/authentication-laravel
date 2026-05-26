@@ -5,14 +5,12 @@
 <div class="min-h-screen bg-slate-50 p-4 sm:p-6 md:p-8 dark:bg-slate-900 text-slate-800 dark:text-slate-100">
     <div class="max-w-7xl mx-auto space-y-8">
 
-        <!-- HEADER W INFO DYAL L-ADMIN -->
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100 dark:bg-slate-800 dark:border-slate-700">
             <div>
                 <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">Admin Control Panel</h2>
                 <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Manage system users and view application status.</p>
             </div>
 
-            <!-- Admin Details -->
             <div class="flex items-center gap-4 bg-slate-50 p-3 rounded-xl dark:bg-slate-900/50">
                 <div class="w-10 h-10 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold uppercase shadow-md shadow-indigo-600/20">
                     {{ substr(auth()->user()->name, 0, 1) }}
@@ -27,14 +25,12 @@
             </div>
         </div>
 
-        <!-- TABLE DYAL L-USERS -->
         <div class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden dark:bg-slate-800 dark:border-slate-700">
             <div class="px-6 py-5 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
                 <h3 class="text-lg font-bold text-slate-900 dark:text-white">All Users ({{ count($users) }})</h3>
                 <span class="text-xs font-medium text-slate-400">Real-time database records</span>
             </div>
 
-            <!-- Wrapper bch table ybqa responsive unique f t-tilifounat -->
             <div class="overflow-x-auto w-full">
                 <table class="w-full text-left border-collapse">
                     <thead>

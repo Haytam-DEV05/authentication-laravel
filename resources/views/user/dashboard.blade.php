@@ -43,10 +43,10 @@
 
             <div class="mt-8 flex justify-end gap-3">
                 <button class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold rounded-xl transition-colors dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600">
-                    Edit Profile
+                    <a href="{{ route('users.show', auth()->user()) }}">Edit Profile</a>
                 </button>
-                <button class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold rounded-xl shadow-md shadow-indigo-500/10 hover:shadow-indigo-500/20 transition-all duration-200">
-                    Settings
+                <button class="px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white text-sm font-semibold rounded-xl shadow-md shadow-indigo-500/10 hover:shadow-indigo-500/20 transition-all duration-200">
+                    Delete
                 </button>
             </div>
 
