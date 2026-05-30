@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -65,7 +66,13 @@ class UserController extends Controller
 
     public function AddImage(Request $request)
     {
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,png,jpeg,webp',
+        ]);
         $user = auth()->user();
+        if ($user->image) {
+            Storage::disk('public')->delete($user->image);
+        }
         $request->validate([
             'image' => 'required|image|mimes:png,jpg,jpeg,webp'
         ]);
