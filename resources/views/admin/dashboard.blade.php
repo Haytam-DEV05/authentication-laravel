@@ -70,7 +70,7 @@
                                 {{ $user->created_at->format('Y / M, d, D') }}
                             </td>
                             <td class="px-6 py-4 text-sm text-center">
-                                <a href=""
+                                <a href="{{ route('admin.showUser', $user->id) }}"
                                     class="inline-flex items-center justify-center px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 font-bold text-xs rounded-lg transition-colors shadow-sm dark:bg-indigo-950/40 dark:text-indigo-400 dark:hover:bg-indigo-900/60 border border-indigo-100/50 dark:border-indigo-900/30">
                                     Details
                                 </a>

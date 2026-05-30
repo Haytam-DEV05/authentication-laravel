@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\UserController;
@@ -13,6 +14,10 @@ Route::post('/', [AuthController::class, 'auth'])->name("users.auth");
 
 Route::get('/register', [AuthController::class, 'register'])->name('users.register');
 Route::post('/register', [AuthController::class, 'store'])->name('users.store');
+
+Route::get('/admin/users/{id}', [AdminController::class, 'show'])->middleware(['auth', 'admin'])->name('admin.showUser');
+Route::patch('/admin/users/{id}', [AdminController::class, 'updatePassword'])->middleware(['auth', 'admin'])->name('admin.editUser');
+Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])->middleware(['auth', 'admin'])->name('admin.deleteUser');
 
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('users.logout');
