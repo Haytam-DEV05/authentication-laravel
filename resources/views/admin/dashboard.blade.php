@@ -40,6 +40,7 @@
                             <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Email</th>
                             <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Role</th>
                             <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Created At</th>
+                            <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">email_verified_at</th>
                             <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-center w-24">Action</th>
                         </tr>
                     </thead>
@@ -68,6 +69,9 @@
                             </td>
                             <td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400 font-medium whitespace-nowrap">
                                 {{ $user->created_at->format('Y / M, d, D') }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400 font-medium whitespace-nowrap text-center">
+                                {{ $user->email_verified_at ? "true" : "false" }}
                             </td>
                             <td class="px-6 py-4 text-sm text-center">
                                 <a href="{{ route('admin.showUser', $user->id) }}"
