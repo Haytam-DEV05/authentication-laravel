@@ -27,6 +27,8 @@
     </div>
     @endif
 
+    <a href="{{ route('dashboard') }}">Retoure</a>
+
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 
         <!-- Left Column: User Profile Card & Avatar Upload -->
@@ -137,6 +139,20 @@
                             Update Password
                         </button>
                     </div>
+                </form>
+            </div>
+
+
+            <div class="bg-rose-50/30 border border-gray-100 rounded-2xl p-6 shadow-sm">
+                <h1>Don't have phone Number</h1>
+                <form action="{{ route('users.addPhoneNumber', $user->id) }}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <div>
+                        <label>Phone Number</label>
+                        <input type="text" name="numberPhone" id="numberPhone" placeholder="0628443260">
+                    </div>
+                    <button type="submit">Add Phone</button>
                 </form>
             </div>
 

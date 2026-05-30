@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -69,7 +70,7 @@ class UserController extends Controller
         $request->validate([
             'image' => 'required|image|mimes:jpg,png,jpeg,webp',
         ]);
-        $user = auth()->user();
+        $user = Auth::user();
         if ($user->image) {
             Storage::disk('public')->delete($user->image);
         }
@@ -83,5 +84,12 @@ class UserController extends Controller
         return redirect()
             ->back()
             ->with('success', 'image Updated Successfuly !');
+    }
+
+
+    public function addPhoneNumber(Request $request)
+    {
+        $user = Auth::user();
+        dd($user);
     }
 }

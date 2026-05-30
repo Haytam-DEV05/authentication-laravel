@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/Dashboard', function () {
         return view('user.dashboard');
-    })->middleware(['user', 'verified'])->name('dashboard');
+    })->middleware(['verified'])->name('dashboard');
 
     Route::get('/admin', function () {
         $users = User::all();
@@ -32,10 +32,13 @@ Route::middleware('auth')->group(function () {
     })->middleware(['admin', 'verified'])->name('admin.dashboard');
 
     // USERS =>
-    Route::resource('/Dahboard/users', UserController::class)->middleware('verified');
+    Route::resource('/Dashboard/users', UserController::class)->middleware('verified');
     Route::patch('/Dashboard/users/{id}/editImage', [UserController::class, 'AddImage'])
         ->middleware('verified')
         ->name('users.editImage');
+    Route::patch('/Dashboard/users/{id}/addPhoneNumber', [UserController::class, 'addPhoneNumber'])
+        ->middleware('verified')
+        ->name('users.addPhoneNumber');
 });
 
 

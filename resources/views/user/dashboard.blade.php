@@ -12,15 +12,22 @@
         </div>
 
         <div class="p-8">
-            <div class="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-700">
-                <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 text-3xl font-bold uppercase shadow-inner dark:bg-indigo-950/50 dark:text-indigo-400">
-                    {{ substr(auth()->user()?->name ?? 'U', 0, 1) }}
+            <div class="relative flex flex-col items-center text-center mt-6 pb-6 border-b border-slate-100">
+                <!-- Profile Image / Initials -->
+                <div class="relative group">
+                    @if(auth()->user()->image)
+                    <div class="w-24 h-24 rounded-full ring-4 ring-white shadow-md overflow-hidden bg-slate-100">
+                        <img src="/storage/{{ auth()->user()->image }}" alt="{{ auth()->user()->name }}" class="w-full h-full object-cover">
+                    </div>
+                    @else
+                    <div class="w-24 h-24 bg-linear-to-tr from-indigo-500 to-indigo-600 text-white rounded-full ring-4 ring-white shadow-md flex items-center justify-center font-bold text-2xl uppercase">
+                        {{ strtoupper(substr(auth()->user()->name, 0, 2)) }}
+                    </div>
+                    @endif
                 </div>
 
-                <div class="text-center sm:text-left space-y-1">
-                    <h2 class="text-xl font-bold text-slate-900 dark:text-white">Account Overview</h2>
-                    <p class="text-sm text-slate-500 dark:text-slate-400">Manage your profile details and account security.</p>
-                </div>
+                <h1 class="text-xl font-bold text-slate-800 mt-4">{{ auth()->user()->name }}</h1>
+                <p class="text-xs font-semibold text-indigo-600 mt-1 uppercase tracking-wider bg-indigo-50/60 px-3 py-1 rounded-full">ID: #{{ auth()->user()->id }}</p>
             </div>
 
             <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
