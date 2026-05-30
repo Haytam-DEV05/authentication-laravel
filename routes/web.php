@@ -31,7 +31,11 @@ Route::middleware('auth')->group(function () {
         return view('admin.dashboard', compact('users'));
     })->middleware(['admin', 'verified'])->name('admin.dashboard');
 
+    // USERS =>
     Route::resource('/Dahboard/users', UserController::class)->middleware('verified');
+    Route::patch('/Dashboard/users/{id}/editImage', [UserController::class, 'AddImage'])
+        ->middleware('verified')
+        ->name('users.editImage');
 });
 
 

@@ -62,4 +62,19 @@ class UserController extends Controller
     {
         //
     }
+
+    public function AddImage(Request $request)
+    {
+        $user = auth()->user();
+        $request->validate([
+            'image' => 'required|image|mimes:png,jpg,jpeg,webp'
+        ]);
+        $image_path = $request->file('image')->store('imageProfile', 'public');
+        $user->update([
+            'image' => $image_path,
+        ]);
+        return redirect()
+            ->back()
+            ->with('success', 'image Updated Successfuly !');
+    }
 }
